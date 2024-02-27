@@ -13,7 +13,7 @@ use Illuminate\View\View;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * ログインビューを表示する。
      */
     public function create(): View
     {
@@ -21,7 +21,7 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * 受信した認証要求を処理する。
      */
     public function store(LoginRequest $request): RedirectResponse
     {

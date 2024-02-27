@@ -16,7 +16,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = 'home';
 
     /**
      * ルートモデルのバインディング、パターンフィルタ、その他のルート設定を定義します。

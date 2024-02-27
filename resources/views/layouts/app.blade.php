@@ -1,4 +1,3 @@
-
 {{-- ヘッドタグと全体のレイアウト --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -27,10 +26,10 @@
             {{-- navバーを読み込み --}}
             @include('layouts.navigation')
 
-            <!-- navバーの下 -->
+            <!-- ヘッダー -->
             @if (isset($header))
                 <header class="bg-pink-200 dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center">
+                    <div class="max-w-7xl mx-auto py-3 px-4 sm:px-6 lg:px-8 text-center">
                         {{ $header }}
                     </div>
                 </header>
