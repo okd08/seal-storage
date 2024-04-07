@@ -7,7 +7,7 @@
             <div class="flex">
                 <!-- ロゴ -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('items.index') }}" class="flex">
+                    <a href="{{ route('home') }}" class="flex">
                         <img src="{{ asset('/favicon.svg') }}" alt="ホームに戻る">
                         <div class="font-bold text-2xl pt-2 pl-1 text-indigo-600">
                             SEAL STORAGE
