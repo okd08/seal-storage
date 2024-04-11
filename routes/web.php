@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // sealコントローラー
     Route::resource('seals', SealController::class);
+    Route::post('/seals.create', [SealController::class, 'store2'])
+        ->name('seals.store2');
 });
 
 require __DIR__.'/auth.php';

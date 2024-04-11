@@ -34,5 +34,5 @@ Breadcrumbs::for('create', function (BreadcrumbTrail $trail) {
 // Home > シール編集
 Breadcrumbs::for('edit', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('シール編集');
+    $trail->push('シール編集', route('seals.edit'));
 });

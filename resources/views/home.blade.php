@@ -1,6 +1,10 @@
 <x-app-layout>
     {{-- ページタイトル --}}
     @section('title', 'ホーム')
+    {{-- パンくず --}}
+    {{ Breadcrumbs::render('home') }}
+    {{-- フラッシュメッセージを読み込み --}}
+    @include('flash::message')
 
     {{-- 一覧 --}}
     <div class="text-center mt-20">

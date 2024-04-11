@@ -9,9 +9,11 @@
         "barryvdh/laravel-debugbar": "^3.9",
         "diglactic/laravel-breadcrumbs": "^9.0",
         "guzzlehttp/guzzle": "^7.2",
+        "josegus/laravel-flash": "^1.4",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "league/flysystem-aws-s3-v3": "^3.27"
     },
     "require-dev": {
         "askdkc/breezejp": "^1.8",

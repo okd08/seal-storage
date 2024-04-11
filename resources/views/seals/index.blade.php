@@ -3,6 +3,8 @@
   @section('title', 'シール一覧')
   {{-- パンくず --}}
   {{ Breadcrumbs::render('index') }}
+  {{-- フラッシュメッセージを読み込み --}}
+  @include('flash::message')
 
   {{-- 検索 --}}
   <div class="my-8">
@@ -10,13 +12,13 @@
       <div class="flex flex-wrap justify-center mx-auto w-8/12 items-center">
         {{-- パッケージ選択 --}}
         <select name="package" class="border-2 border-sky-200 pr-8 py-2 mr-4 mb-2 rounded">
-          <option value="" selected>カテゴリ―を選択</option>
+          <option value="" selected>パッケージを選択</option>
           @foreach ($packages as $p)
             <option value="{{ $p->id }}" {{ $selectedPackage == $p->id ? 'selected' : '' }}>{{ $p->name }}</option>
           @endforeach
         </select>
         {{-- キーワード入力 --}}
-        <input type="text" name="keyword" value="{{ $keyword }}" class="border-2 border-pink-200 mr-6 mb-2 rounded" placeholder="キーワードを入力">
+        <input type="text" name="keyword" value="{{ $keyword }}" class="border-2 border-pink-200 mr-6 mb-2 rounded" placeholder="タグまたはキーワードを入力">
         {{-- 検索ボタン --}}
         <button type="submit" class="font-bold bg-yellow-300 text-gray-500 hover:bg-indigo-500 hover:text-white px-5 py-3 -mt-1 rounded">検索</button>
       </div>
