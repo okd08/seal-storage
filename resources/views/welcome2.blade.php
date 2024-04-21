@@ -46,17 +46,24 @@
                                 <span class="relative w-full text-white transition-colors duration-200 ease-in-out group-hover:text-white text-xl lg:text-2xl text-center whitespace-nowrap">ログイン</span>
                             </a>
                             {{-- 新規登録 --}}
-                            @if (Route::has('register'))
+                            {{-- @if (Route::has('register'))
                                 <a href="{{ url('register') }}" class="relative inline-flex items-center justify-start px-8 py-3 mt-8 mb-4 overflow-hidden font-medium transition-all bg-pink-300 rounded-xl group active:bg-pink-200">
                                     <span class="absolute top-0 right-0 inline-block w-6 h-6 transition-all duration-500 ease-in-out bg-yellow-200 rounded-bl group-hover:-mr-6 group-hover:-mt-6">
                                         <span class="absolute top-0 right-0 w-8 h-8 rotate-45 translate-x-1/2 -translate-y-1/2 bg-yellow-50"></span>
                                     </span>
                                     <span class="relative w-full text-white transition-colors duration-200 ease-in-out group-hover:text-white text-center text-lg lg:text-2xl whitespace-nowrap">新規登録</span>
                                 </a>
-                            @endif
+                            @endif --}}
                         @endauth
                     </div>
                 @endif
+            </div>
+
+            <div class="w-8/12 lg:w-5/12 mx-auto text-center py-10">
+                <p class="font-bold">☆工夫した点☆</p>
+                <p>・画像をたくさん投稿するため、保存先はS3にした。</p>
+                <p>・JavaScriptを使用し、画像のプレビューやタグの追加/削除を動的に行えるようにした。</p>
+                <p>・パッケージ名やタグ名をクリックするだけで検索ができるようにして、利便性を高めた。</p>
             </div>
         </div>
     </body>
