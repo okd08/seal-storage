@@ -10,7 +10,7 @@ use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 // Home
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
-    $trail->push('Home', route('home'));
+    $trail->push('ホーム', route('home'));
 });
 
 // Home > シール一覧
@@ -34,5 +34,17 @@ Breadcrumbs::for('create', function (BreadcrumbTrail $trail) {
 // Home > シール編集
 Breadcrumbs::for('edit', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push('シール編集', route('seals.edit'));
+    $trail->push('パッケージ、シール編集');
+});
+
+// Home > パッケージ管理
+Breadcrumbs::for('index2', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('パッケージ管理');
+});
+
+// Home > パッケージ編集
+Breadcrumbs::for('edit2', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('パッケージ編集');
 });

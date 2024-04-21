@@ -1,6 +1,6 @@
 <x-app-layout>
   {{-- ページタイトル --}}
-  @section('title', 'シール登録')
+  @section('title', 'パッケージ、シール登録')
   {{-- パンくず --}}
   {{ Breadcrumbs::render('create') }}
   {{-- フラッシュメッセージを読み込み --}}
@@ -12,8 +12,11 @@
     <div class="w-10/12 pt-20 mx-auto">
       <p class="text-bold text-lg mb-4 font-bold text-center">┈୨୧┈ パッケージ登録 ┈୨୧┈</p>
       <div class="text-center">
-        <input type="text" name="name" value="{{ old('name') }}" placeholder="パッケージ名" class="border-2 border-indigo-500 w-6/12 lg:w-4/12 p-2 mb-12 rounded">
-        <button type="submit" class="bg-sky-300 hover:bg-sky-400 text-white text-lg font-bold py-2 px-3 rounded-lg ml-2">登録</button>
+        <input type="text" name="name" value="{{ old('name') }}" placeholder="パッケージ名" class="border-2 border-indigo-500 w-6/12 lg:w-4/12 p-2 mb-6 rounded">
+        <button type="submit" class="bg-yellow-300 hover:bg-yellow-400 text-white text-lg font-bold py-2 px-3 rounded-lg ml-2">登録</button>
+        <div class="w-6/12 lg:w-3/12 mx-auto text-center bg-sky-300 hover:bg-sky-400 rounded-lg py-2">
+          <a href="{{ route('packages.index') }}" class="text-lg font-bold text-white">パッケージ管理画面へ</a>
+        </div>
       </div>
     </div>
   </form>
@@ -38,7 +41,7 @@
             <select name="package" class="border-2 border-sky-200 py-2 ml-2 mb-6 pr-10 rounded">
               <option value="" disabled selected>選択してください</option>
               @foreach ($packages as $p)
-                <option value="{{ $p->id }}">{{ $p->name }}</option>
+                <option value="{{ $p->id }}" {{ (old('package') ?? null) == $p['id'] ? 'selected' : '' }}>{{ $p->name }}</option>
               @endforeach
             </select>
             {{-- シール名入力 --}}

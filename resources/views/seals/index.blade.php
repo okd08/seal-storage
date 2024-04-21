@@ -11,7 +11,7 @@
     <form action="{{ route('seals.index') }}" method="GET">
       <div class="flex flex-wrap justify-center mx-auto w-8/12 items-center">
         {{-- パッケージ選択 --}}
-        <select name="package" class="border-2 border-sky-200 pr-8 py-2 mr-4 mb-2 rounded">
+        <select name="package" class="border-2 border-sky-200 pr-8 py-2 px-2 mr-4 mb-2 rounded">
           <option value="" selected>パッケージを選択</option>
           @foreach ($packages as $p)
             <option value="{{ $p->id }}" {{ $selectedPackage == $p->id ? 'selected' : '' }}>{{ $p->name }}</option>

@@ -23,6 +23,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('seals', SealController::class);
     Route::post('/seals.create', [SealController::class, 'store2'])
         ->name('seals.store2');
+    Route::get('/packages/index', [SealController::class, 'index2'])
+        ->name('packages.index');
+    Route::get('/packages/edit/{id}', [SealController::class, 'edit2'])
+        ->name('packages.edit');
+    Route::patch('/packages/update/{id}', [SealController::class, 'update2'])
+        ->name('packages.update');
+    Route::delete('/packages/{id}', [SealController::class, 'destroy2'])
+        ->name('packages.destroy');
 });
 
 require __DIR__.'/auth.php';

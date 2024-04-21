@@ -56,7 +56,7 @@ class SealController extends Controller
     }
 
     /**
-     * シール登録画面
+     * 登録画面
      */
     public function create()
     {
@@ -157,26 +157,141 @@ class SealController extends Controller
     }
 
     /**
-     *指定したリソースを編集するためのフォームを表示する。
+     *編集画面
      */
     public function edit(string $id)
     {
-        //
+        // リレーションで他テーブルの値を一緒に取得
+        $seal = Seal::with('package', 'tags')
+            // 指定のidと一致するカラムに絞る
+            ->where('seals.id', $id)
+            ->first();
+
+        $packages = Package::all();
+
+        return view('seals.edit', compact('seal', 'packages'));
     }
 
     /**
-     *ストレージ内の指定されたリソースを更新する。
+     *シール更新
      */
     public function update(Request $request, string $id)
     {
-        //
+        $posts = $request->all();
+
+        // 更新する項目の配列
+        $update_array = [
+            'package_id' => $posts['package'],
+            'name' => $posts['name'],
+        ];
+        // 画像の更新がある場合
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            // $imageを公開状態でs3のrecipeフォルダに保存
+            $path = Storage::disk('s3')->putFile('recipe', $image, 'public');
+            // 画像のURLを取得
+            $url = Storage::disk('s3')->url($path);
+            // 配列にimageを追加
+            $update_array['image'] = $url;
+        }
+
+        // トランザクション
+        try {
+            DB::beginTransaction();
+
+            Seal::where('id', $id)->update($update_array);
+
+            // 一度削除
+            Tag::where('seal_id', $id)->delete();
+
+            // tagをインサートする準備
+            $tags = [];
+            foreach ($posts['tags'] as $key => $tag) {
+                $tags[$key] = [
+                    'seal_id' => $id,
+                    'name' => $tag['name'],
+                ];
+            }
+
+            Tag::insert($tags);
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            \Log::debug(print_r($th->getMessage(), true));
+            throw $th;
+        }
+
+        // フラッシュメッセージ
+        flash()->success('シールを更新しました。');
+
+        return redirect()->route('seals.show', ['seal' => $id]);
     }
 
     /**
-     * 指定されたリソースをストレージから削除する。
+     * シール削除
      */
     public function destroy(string $id)
     {
-        //
+        Seal::where('id', $id)->delete();
+
+        flash()->error('シールを削除しました。');
+
+        return redirect()->route('seals.index');
+    }
+
+
+    /**
+     * パッケージ一覧画面
+     */
+    public function index2()
+    {
+        $packages = Package::orderBy('id', 'desc')->get();
+
+        return view('seals.index2', compact('packages'));
+    }
+
+        /**
+     *パッケージ編集画面
+     */
+    public function edit2(string $id)
+    {
+        $package = Package::all()
+            ->where('id', $id)
+            ->first();
+
+        return view('seals.edit2', compact('package'));
+    }
+
+    /**
+     *パッケージ更新
+     */
+    public function update2(Request $request, string $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:50',
+        ]);
+
+        // パッケージの取得と更新
+        $package = Package::findOrFail($id); // IDに対応するパッケージを取得
+        $package->name = $validated['name']; // バリデーション済みの名前を設定
+        $package->save(); // パッケージを保存
+
+        // フラッシュメッセージ
+        flash()->success('パッケージを更新しました。');
+
+        return redirect()->route('packages.index');
+    }
+
+    /**
+     * パッケージ削除
+     */
+    public function destroy2(string $id)
+    {
+        Package::where('id', $id)->delete();
+
+        flash()->error('パッケージを削除しました。');
+
+        return redirect()->route('packages.index');
     }
 }
