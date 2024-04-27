@@ -10,7 +10,7 @@
   <form action="{{ route('seals.index') }}" method="GET" class="pb-20">
     <div class="pt-20">
       {{-- 画像 --}}
-      <div class="mx-auto mb-4" style="width: 40%; padding-top: 40%; position: relative;">
+      <div class="mx-auto mb-4" style="width: 70%; padding-top: 70%; position: relative;">
         <img src="{{ $seal->image }}" alt="{{ $seal->name }}" class="rounded border-2 border-yellow-300" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
       </div>
       {{-- パッケージ --}}

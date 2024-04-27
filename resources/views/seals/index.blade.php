@@ -33,14 +33,14 @@
         <div class="border-2 border-yellow-300 bg-white rounded-md mx-2 my-3 w-1/4 lg:w-1/5">
           <a href="{{ route('seals.show', $s) }}">
             {{-- 画像 --}}
-            <div class="rounded overflow-hidden mb-1" style="width: 100%; padding-top: 100%; position: relative;">
+            <div class="rounded overflow-hidden" style="width: 100%; padding-top: 100%; position: relative;">
               <img src="{{ $s->image }}" alt="{{ $s->name }}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
             </div>
             {{-- テキスト --}}
-            <div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+            {{-- <div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
               <h3 class="text-gray-500 text-xs">{{ $s->package->name }}</h3>
               <h2 class="text-gray-900 text-lg">{{ $s->name }}</h2>
-            </div>
+            </div> --}}
           </a>
         </div>
       {{-- シールが無い場合 --}}
