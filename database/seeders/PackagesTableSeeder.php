@@ -13,16 +13,16 @@ class PackagesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $packages = [
-            ['name' => 'うさぎパック', 'user_id' => 1],
-            ['name' => 'お花パック', 'user_id' => 1],
-            ['name' => 'いちごパック', 'user_id' => 1],
-            ['name' => 'マイメロパック', 'user_id' => 1],
-            ['name' => '惑星パック', 'user_id' => 1],
-        ];
+        // $packages = [
+        //     ['name' => 'うさぎパック', 'user_id' => 1],
+        //     ['name' => 'お花パック', 'user_id' => 1],
+        //     ['name' => 'いちごパック', 'user_id' => 1],
+        //     ['name' => 'マイメロパック', 'user_id' => 1],
+        //     ['name' => '惑星パック', 'user_id' => 1],
+        // ];
 
-        foreach ($packages as $package) {
-            DB::table('packages')->insert($package);
-        }
+        // foreach ($packages as $package) {
+        //     DB::table('packages')->insert($package);
+        // }
     }
 }

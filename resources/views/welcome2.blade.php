@@ -60,10 +60,12 @@
             </div>
 
             <div class="w-8/12 lg:w-5/12 mx-auto text-center py-10">
-                <p class="font-bold">☆工夫した点☆</p>
+                <p class="mb-5 py-2 px-10 rounded-full border-dashed border-4 border-pink-200 bg-white">かわいいシールを集めるのが好き!<br>でも、フレークシールは1枚ずつファイルに入れるとかさばるし、いちいち袋から出して見るのも面倒…。<br>そんな思いをきっかけに作ったシステムです。</p>
+                <img src="/images/seal.jpg">
+                <p class="font-bold mt-5">☆工夫した点☆</p>
                 <p>・画像をたくさん投稿するため、保存先はS3にした。</p>
                 <p>・JavaScriptを使用し、画像のプレビューやタグの追加/削除を動的に行えるようにした。</p>
-                <p>・パッケージ名やタグ名をクリックするだけで検索ができるようにして、利便性を高めた。</p>
+                <p>・パッケージ名やタグ名をクリックするだけで検索ができるようにして、webならではの利便性を高めた。</p>
             </div>
         </div>
     </body>
