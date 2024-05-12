@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
         ->name('packages.update');
     Route::delete('/packages/{id}', [SealController::class, 'destroy2'])
         ->name('packages.destroy');
+    Route::patch('/seals.favorite/{id}', [SealController::class, 'favorite'])
+        ->name('seals.favorite');
 });
 
 require __DIR__.'/auth.php';

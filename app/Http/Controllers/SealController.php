@@ -41,6 +41,10 @@ class SealController extends Controller
                         });
                 });
             }
+            // お気に入りが0のものだけを検索
+            if (!empty($filters['favorite'])) {
+                $query->where('favorite', 0);
+            }
         }
 
         $seals = $query->paginate(24);
@@ -115,6 +119,7 @@ class SealController extends Controller
                 'package_id' => $posts['package'],
                 'name' => $posts['name'],
                 'image' => $url, // DBにはURLを保存
+                'favorite' => 1,
             ]);
 
             // tagを挿入する準備
@@ -150,10 +155,24 @@ class SealController extends Controller
         // リレーションで他テーブルの値を一緒に取得
         $seal = Seal::with('package', 'tags')
             // 指定のidと一致するカラムに絞る
-            ->where('seals.id', $id)
+            ->where('id', $id)
             ->first();
 
         return view('seals.show', compact('seal'));
+    }
+
+    /**
+     * お気に入り
+     */
+    public function favorite(string $id)
+    {
+        $seal = Seal::find($id);
+
+        // favoriteカラムの値が0なら1、1なら0に変更
+        $seal->favorite = $seal->favorite == 0 ? 1 : 0;
+        $seal->save();
+
+        return redirect()->route('seals.show', $id);
     }
 
     /**

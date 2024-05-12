@@ -14,18 +14,19 @@ class SealsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // // DBからpackageテーブルのid値を取得し配列にする
-        // $packages = DB::table('packages')->pluck('id')->toArray();
+        // DBからpackageテーブルのid値を取得し配列にする
+        $packages = DB::table('packages')->pluck('id')->toArray();
 
-        // $image_types = ['cake', 'candy', 'sweets', 'rainbow', 'flower', 'heart', 'star', 'sky', 'gummy', 'cookie', 'fruits'];
+        $image_types = ['cake', 'candy', 'sweets', 'rainbow', 'flower', 'heart', 'star', 'sky', 'gummy', 'cookie', 'fruits'];
 
-        // // 20回実行
-        // for ($i = 0; $i < 50; $i++) {
-        //     DB::table('seals')->insert([
-        //         'package_id' => $packages[array_rand($packages)], //packagesテーブルのidからランダムで選ぶ
-        //         'name' => Str::random(10),
-        //         'image' => 'https://source.unsplash.com/random/?' . $image_types[rand(0, 10)], //ランダムに画像を取得
-        //     ]);
-        // }
+        // 20回実行
+        for ($i = 0; $i < 50; $i++) {
+            DB::table('seals')->insert([
+                'package_id' => $packages[array_rand($packages)], //packagesテーブルのidからランダムで選ぶ
+                'name' => Str::random(10),
+                'image' => 'https://source.unsplash.com/random/?' . $image_types[rand(0, 10)], //ランダムに画像を取得
+                'favorite' => (bool)rand(0, 1), //trueかfalseランダムに
+            ]);
+        }
     }
 }

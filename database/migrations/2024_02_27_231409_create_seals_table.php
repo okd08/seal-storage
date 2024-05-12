@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('package_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->text('image');
+            $table->boolean('favorite')->default(false);
             // 時間が指定されなかった場合は現在の時間を入れる
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

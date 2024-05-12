@@ -59,6 +59,12 @@
                 @endif
             </div>
 
+            <div class="w-8/12 lg:w-5/12 mx-auto text-center text-gray-700 my-5 p-2 bg-white bg-opacity-70">
+                <h2 class="text-lg font-bold mb-2">更新履歴</h2>
+                <ul class="list-inside">
+                    <li>・2024/5/13： お気に入り機能を追加しました。</li>
+                </ul>
+            </div>
             <div class="w-8/12 lg:w-5/12 mx-auto text-center py-10">
                 <p class="mb-5 py-2 px-10 rounded-full border-dashed border-4 border-pink-200 bg-white">かわいいシールを集めるのが好き!<br>でも、フレークシールは1枚ずつファイルに入れるとかさばるし、いちいち袋から出して見るのも面倒…。<br>そんな思いをきっかけに作ったシステムです。</p>
                 <img src="/images/seal.jpg">
