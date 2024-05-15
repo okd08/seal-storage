@@ -12,6 +12,13 @@ class Seal extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'image',
+        'favorite',
+        'package_id',
+    ];
+
     // リレーション
     public function package()
     {

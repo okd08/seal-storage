@@ -20,7 +20,6 @@ class SealController extends Controller
     {
         // sealテーブルとpackageテーブルの値(リレーション関数を実行)を取得
         $query = Seal::with(['package', 'tags'])
-            // 降順にする
             ->orderBy('id', 'desc');
 
         // リクエストを取得
@@ -32,7 +31,7 @@ class SealController extends Controller
             if (!empty($filters['package'])) {
                 $query->where('package_id', $filters['package']);
             }
-            //  タグ、キーワード検索
+            // タグ、キーワード検索
             if (!empty($filters['keyword'])) {
                 $query->where(function ($query) use ($filters) {
                     $query->where('name', 'LIKE', '%' . $filters['keyword'] . '%')
@@ -41,19 +40,20 @@ class SealController extends Controller
                         });
                 });
             }
-            // お気に入りが0のものだけを検索
+            // お気に入りだけを検索
             if (!empty($filters['favorite'])) {
                 $query->where('favorite', 0);
             }
         }
 
+        // ページネートしてシールを取得
         $seals = $query->paginate(24);
 
-        // 選択されたパッケージをビューに渡す
+        // 各post値を取得
         $selectedPackage = isset($filters['package']) ? $filters['package'] : null;
-        // 
         $keyword = isset($filters['keyword']) ? $filters['keyword'] : '';
 
+        // パッケージを取得
         $packages = Package::all();
 
         return view('seals.index', compact('seals', 'packages', 'filters', 'selectedPackage', 'keyword'));
@@ -74,15 +74,15 @@ class SealController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション
         $validated = $request->validate([
             'name' => 'required|string|max:50',
         ]);
 
-        $posts = $request->all();
-
+        // post値をDBに保存
         Package::insert([
             'user_id' => Auth::id(),
-            'name' => $posts['name'],
+            'name' => $validated['name'],
         ]);
 
         // フラッシュメッセージ
@@ -97,12 +97,12 @@ class SealController extends Controller
     public function store2(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:50',
             'image' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
-            // 'package_id' => 'required',
+            'package_id' => 'required',
+            'name' => 'required|string|max:50',
+            'tags' => 'array',
+            'tags.*' => 'max:50',
         ]);
-
-        $posts = $request->all();
 
         $image = $request->file('image');
         // $imageを公開状態でs3のsealフォルダに保存
@@ -113,24 +113,22 @@ class SealController extends Controller
         // トランザクション
         try {
             DB::beginTransaction();
-
             // Sealテーブルに挿入
             $sealId = Seal::insertGetId([
-                'package_id' => $posts['package'],
-                'name' => $posts['name'],
+                'package_id' => $validated['package_id'],
+                'name' => $validated['name'],
                 'image' => $url, // DBにはURLを保存
                 'favorite' => 1,
             ]);
 
             // tagを挿入する準備
             $tags = [];
-            foreach ($posts['tags'] as $key => $tag) {
+            foreach ($validated['tags'] as $key => $tag) {
                 $tags[$key] = [
                     'seal_id' => $sealId,
                     'name' => $tag['name'],
                 ];
             }
-
             // Tagテーブルに挿入
             Tag::insert($tags);
 
@@ -144,7 +142,7 @@ class SealController extends Controller
         // フラッシュメッセージ
         flash()->success('シールを登録しました。');
 
-        return redirect()->route('seals.create');
+        return back();
     }
 
     /**
@@ -196,12 +194,18 @@ class SealController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $posts = $request->all();
+        $validated = $request->validate([
+            'image' => 'file|image|mimes:jpeg,png,jpg|max:2048',
+            'package_id' => 'required',
+            'name' => 'required|string|max:50',
+            'tags' => 'array',
+            'tags.*' => 'max:50',
+        ]);
 
         // 更新する項目の配列
         $update_array = [
-            'package_id' => $posts['package'],
-            'name' => $posts['name'],
+            'package_id' => $validated['package_id'],
+            'name' => $validated['name'],
         ];
         // 画像の更新がある場合
         if ($request->hasFile('image')) {
@@ -218,20 +222,21 @@ class SealController extends Controller
         try {
             DB::beginTransaction();
 
+            // sealテーブルを更新
             Seal::where('id', $id)->update($update_array);
 
             // 一度削除
             Tag::where('seal_id', $id)->delete();
 
-            // tagをインサートする準備
+            // tagを挿入する準備
             $tags = [];
-            foreach ($posts['tags'] as $key => $tag) {
+            foreach ($validated['tags'] as $key => $tag) {
                 $tags[$key] = [
                     'seal_id' => $id,
                     'name' => $tag['name'],
                 ];
             }
-
+            // Tagテーブルに挿入
             Tag::insert($tags);
 
             DB::commit();
@@ -258,7 +263,6 @@ class SealController extends Controller
 
         return redirect()->route('seals.index');
     }
-
 
     /**
      * パッケージ一覧画面

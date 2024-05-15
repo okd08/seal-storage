@@ -3,8 +3,6 @@
     @section('title', 'ホーム')
     {{-- パンくず --}}
     {{ Breadcrumbs::render('home') }}
-    {{-- フラッシュメッセージを読み込み --}}
-    @include('flash::message')
 
     {{-- 一覧 --}}
     <div class="text-center mt-20">
@@ -15,6 +13,7 @@
             <span class="relative w-full text-white transition-colors duration-200 ease-in-out group-hover:text-white text-2xl lg:text-3xl text-center whitespace-nowrap">シール一覧</span>
         </a>
     </div>
+
     {{-- 登録 --}}
     <div class="text-center mt-2">
         <a href="{{ route('seals.create') }}" class="relative inline-flex items-center justify-start px-5 py-8 mt-8 mb-4 overflow-hidden font-medium transition-all bg-pink-300 rounded-xl group active:bg-pink-200">

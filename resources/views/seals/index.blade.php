@@ -29,7 +29,7 @@
           </label>
         </div>
         {{-- 検索ボタン --}}
-        <button type="submit" class="font-bold bg-yellow-300 text-gray-500 hover:bg-indigo-500 hover:text-white px-5 py-3 -mt-1 rounded">検索</button>
+        <button type="submit" class="font-bold bg-yellow-300 text-gray-500 hover:bg-indigo-500 hover:text-white px-5 py-2 -mt-1 rounded">検索</button>
       </div>
     </form>
   </div>
@@ -41,7 +41,6 @@
       @forelse ($seals as $s)
         <div class="border-2 border-yellow-300 bg-white rounded-md mx-2 my-3 w-1/4 lg:w-1/5">
           <a href="{{ route('seals.show', $s) }}">
-            {{-- 画像 --}}
             <div class="rounded overflow-hidden" style="width: 100%; padding-top: 100%; position: relative;">
               {{-- お気に入り --}}
               @if ($s->favorite == 0)
@@ -51,6 +50,7 @@
                 </svg>
               </div>
               @endif
+              {{-- 画像 --}}
               <img src="{{ $s->image }}" alt="{{ $s->name }}" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
             </div>
           </a>
@@ -65,7 +65,7 @@
   </div>
 
   {{-- 上に戻るボタン --}}
-  <button onclick="scrollToTop()"  class="fixed bottom-5 right-5 bg-sky-200 hover:bg-sky-300 text-pink-300 text-xl py-2 px-2 rounded-full z-20">
+  <button onclick="scrollToTop()" class="fixed bottom-5 right-5 bg-sky-200 hover:bg-sky-300 text-pink-300 text-xl py-2 px-2 rounded-full z-20">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
       <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
     </svg>

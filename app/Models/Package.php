@@ -12,6 +12,10 @@ class Package extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     // リレーション
     public function user()
     {

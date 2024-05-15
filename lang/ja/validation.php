@@ -254,6 +254,7 @@ return [
         'username' => 'ユーザー名',
         'year' => '年',
         'package_id' => 'パッケージ名',
+        'tags' => 'タグ',
     ],
 
 ];

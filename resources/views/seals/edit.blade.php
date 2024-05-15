@@ -10,7 +10,7 @@
   <form action="{{ route('seals.store') }}" method="POST">
     @csrf
     <div class="w-10/12 pt-20 mx-auto">
-      <p class="text-bold text-lg mb-4 font-bold text-center">┈୨୧┈ パッケージ編集 ┈୨୧┈</p>
+      <p class="text-bold text-lg mb-4 font-bold text-center text-gray-700">┈୨୧┈ パッケージ編集 ┈୨୧┈</p>
       <div class="w-6/12 lg:w-3/12 mx-auto text-center bg-sky-300 hover:bg-sky-400 rounded-lg py-2">
         <a href="{{ route('packages.index') }}" class="text-lg font-bold text-white">パッケージ管理画面へ</a>
       </div>
@@ -22,7 +22,7 @@
     @csrf
     @method('PATCH')
     <div class="w-10/12 lg:w-8/12 pt-20 mx-auto">
-      <p class="text-bold text-lg mb-4 font-bold text-center">┈୨୧┈ シール編集 ┈୨୧┈</p>
+      <p class="text-bold text-lg mb-4 font-bold text-center text-gray-700">┈୨୧┈ シール編集 ┈୨୧┈</p>
       <div class="border-2 border-gray-200 p-4 items-center mb-3">
         <div class="grid grid-cols-2 gap-6">
           {{-- 画像選択 --}}
@@ -35,7 +35,7 @@
           <div class="col-span-1">
             {{-- パッケージ選択 --}}
             <p>パッケージを選択</p>
-            <select name="package" class="border-2 border-sky-200 py-2 ml-2 mb-6 pr-10 rounded">
+            <select name="package_id" class="border-2 border-sky-200 py-2 ml-2 mb-6 pr-10 rounded">
               <option value="" disabled>選択してください</option>
               @foreach ($packages as $p)
                 <option value="{{ $p->id }}" {{ ($seal['package_id'] ?? null) == $p->id ? 'selected' : '' }}>{{ $p->name }}</option>
@@ -79,5 +79,5 @@
 </x-app-layout>
 
 {{-- js読み込み --}}
-  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script> {{-- sortable --}}
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script> 
   <script src="/js/create.js"></script>

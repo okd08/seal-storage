@@ -8,43 +8,43 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 //  with `$trail`. This is nice for IDE type checking and completion.
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
-// Home
+// ホーム
 Breadcrumbs::for('home', function (BreadcrumbTrail $trail) {
     $trail->push('ホーム', route('home'));
 });
 
-// Home > シール一覧
+// ホーム > シール一覧
 Breadcrumbs::for('index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('シール一覧', route('seals.index'));
 });
 
-// Home > シール詳細
+// ホーム > シール一覧 > シール詳細
 Breadcrumbs::for('show', function (BreadcrumbTrail $trail, $seal) {
     $trail->parent('index');
     $trail->push($seal['name'], route('seals.show', $seal['id']));
 });
 
-// Home > シール投稿
+// ホーム > シール一覧 > シール投稿
 Breadcrumbs::for('create', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
+    $trail->parent('index');
     $trail->push('シール投稿', route('seals.create'));
 });
 
-// Home > シール編集
+// ホーム > シール一覧 > シール編集
 Breadcrumbs::for('edit', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
+    $trail->parent('index');
     $trail->push('パッケージ、シール編集');
 });
 
-// Home > パッケージ管理
+// ホーム > シール一覧 > パッケージ管理
 Breadcrumbs::for('index2', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
-    $trail->push('パッケージ管理');
+    $trail->parent('index');
+    $trail->push('パッケージ管理', route('packages.index'));
 });
 
-// Home > パッケージ編集
+// ホーム > シール一覧 > パッケージ管理 > パッケージ編集
 Breadcrumbs::for('edit2', function (BreadcrumbTrail $trail) {
-    $trail->parent('home');
+    $trail->parent('index2');
     $trail->push('パッケージ編集');
 });

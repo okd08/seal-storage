@@ -11,6 +11,10 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     // リレーション
     public function seal()
     {
