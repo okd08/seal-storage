@@ -32,12 +32,12 @@
 
     <form action="{{ route('seals.index') }}" method="GET" class="mb-5">
       {{-- 画像 --}}
-      <div class="mx-auto mb-4" style="width: 70%; padding-top: 70%; position: relative;">
+      <div class="mx-auto mb-4" style="width: 50%; padding-top: 50%; position: relative;">
         <img src="{{ $seal->image }}" alt="{{ $seal->name }}" class="rounded border-2 border-yellow-300" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
       </div>
       {{-- パッケージ --}}
       <div class="flex justify-center">
-        <button type="submit" name="package" value="{{ $seal->package_id }}" class="font-bold text-gray-500 hover:text-pink-300 mb-2">{{ $seal->package->name }}</button>
+        <button type="submit" name="package" value="{{ $seal->package_id }}" class="font-bold text-gray-500 hover:text-pink-300 mb-2 text-lg">{{ $seal->package->name }}</button>
       </div>
       {{-- タグ --}}
       <div class="w-8/12 mx-auto px-4 py-2 bg-white rounded-xl flex flex-wrap mb-10">

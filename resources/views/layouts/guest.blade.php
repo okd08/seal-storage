@@ -18,14 +18,14 @@
         <link rel="shortcut icon" href="{{ asset('/favicon.svg') }}">
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-yellow-50 dark:bg-gray-900">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-yellow-50 dark:bg-gray-900 py-10">
             <div>
                 <a href="/">
-                    <img src="/images/logo.png" alt="サイトロゴ" class="py-4 w-1/3 mx-auto">
+                    <img src="/images/logo.png" alt="サイトロゴ" class="pt-5 w-2/3 mx-auto">
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-pink-100 dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md px-6 py-4 bg-pink-100 dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>
